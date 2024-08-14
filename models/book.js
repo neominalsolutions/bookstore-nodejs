@@ -16,4 +16,4 @@ const BookSchema = new Schema({
     category_ids:[{type:Schema.Types.ObjectId, ref:'Category'}] // ilişki
 })
 
-// module.exports = mongoose.model('Book',BookSchema,'books');
+module.exports = mongoose.model('Book',BookSchema,'books');
