@@ -19,7 +19,7 @@ var app = express();
 // middleware
 
 
-mongoose.connect('mongodb://localhost/booksDb',{})
+mongoose.connect('mongodb://127.0.0.1:27017/booksDb',{})
 .then(() => {
     console.log('mongoya bağlandı');
 })

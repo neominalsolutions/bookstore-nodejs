@@ -43,10 +43,6 @@ router.get('/aggregates',async (req,res) => {
     res.status(200).json(data);
 })
 
-router.get('/:id',async (req,res) => {
-    const data = await Book.findById(req.params.id)
-    res.status(200).json(data);
-})
 
 router.post('/', async (req,res) => {
     console.log('body', req.body);
@@ -55,6 +51,12 @@ router.post('/', async (req,res) => {
      res.status(201).json(book);
     // await Book.create(req.body);
 });
+
+router.get('/:id',async (req,res) => {
+    const data = await Book.findById(req.params.id)
+    res.status(200).json(data);
+})
+
 
 // api/books/1 PUT
 router.put('/:id',async (req,res) => {
@@ -68,7 +70,7 @@ router.put('/:id',async (req,res) => {
             res.status(404).json({message:"Book Not Found!"});
         }
         else {
-            res.status(204);
+            res.status(204).json();
         }
 
     } catch (error) {
@@ -87,7 +89,7 @@ router.delete('/:id', async (req,res) => {
     if(!book){
         res.status(404).json({message:"Book Not Found"});
     } else {
-        res.status(204);
+        res.status(204).json();
     }
 })
 
