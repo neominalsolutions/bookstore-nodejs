@@ -8,8 +8,8 @@ const bodyParser = require('body-parser');
 
 
 var indexRouter = require('./routes/index');
-var categoryRouter = require('./routes/categories');
-
+const categoryRouter = require('./routes/categories');
+const bookRouter = require('./routes/books');
 
 
 // services
@@ -19,13 +19,6 @@ var app = express();
 // middleware
 
 
-app.use(bodyParser.json());
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
 mongoose.connect('mongodb://localhost/booksDb',{})
 .then(() => {
     console.log('mongoya bağlandı');
@@ -34,8 +27,19 @@ mongoose.connect('mongodb://localhost/booksDb',{})
     console.error('hata', err);
 })
 
+app.use(bodyParser.json());
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+
 
 app.use('/', indexRouter);
 app.use('/api/categories', categoryRouter);
+app.use('/api/books', bookRouter);
 
 module.exports = app;
